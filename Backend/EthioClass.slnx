@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EthioClass.Api/EthioClass.Api.csproj" />
+    <Project Path="src/EthioClass.Application/EthioClass.Application.csproj" />
+    <Project Path="src/EthioClass.Domain/EthioClass.Domain.csproj" />
+    <Project Path="src/EthioClass.Infrastructure/EthioClass.Infrastructure.csproj" />
+  </Folder>
+</Solution>
