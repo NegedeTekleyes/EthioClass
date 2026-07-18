@@ -46,7 +46,9 @@ Generated\ Files/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
-
+appsettings.Development.json
+appsettings.Production.json
+*.env
 # NUnit
 *.VisualState.xml
 TestResult.xml
