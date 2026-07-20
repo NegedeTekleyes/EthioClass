@@ -1,4 +1,5 @@
 using EthioClass.Application.Schools.Commands;
+using EthioClass.Application.Schools.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ public class SchoolsController(IMediator mediator) : ControllerBase
         try
         {
             var result = await mediator.Send(command, ct);
-            return CreatedAtAction(nameof(CreateSchool), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(GetSchoolById), new { id = result.Id }, result);
         }
         catch (FluentValidation.ValidationException ex)
         {
@@ -34,5 +35,12 @@ public class SchoolsController(IMediator mediator) : ControllerBase
             });
 
         }
+    }
+
+    [HttpGet("{id:int}", Name = nameof(GetSchoolById))]
+    public async Task<IActionResult> GetSchoolById(int id, CancellationToken ct)
+    {
+        var school = await mediator.Send(new GetSchoolByIdQuery(id), ct);
+        return school is not null ? Ok(school) : NotFound();
     }
 }
