@@ -1,8 +1,8 @@
-
 using EthioClass.Application.Schools.Commands;
-using EthioClass.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+
+namespace EthioClass.Api.Controllers;
 
 [ApiController]
 [Microsoft.AspNetCore.Components.Route("api/schools")]
