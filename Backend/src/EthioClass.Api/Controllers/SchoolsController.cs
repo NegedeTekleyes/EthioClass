@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EthioClass.Api.Controllers;
 
 [ApiController]
-[Microsoft.AspNetCore.Components.Route("api/schools")]
+[Route("api/schools")]
 public class SchoolsController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
@@ -15,6 +15,13 @@ public class SchoolsController(IMediator mediator) : ControllerBase
         {
             var result = await mediator.Send(command, ct);
             return CreatedAtAction(nameof(CreateSchool), new { id = result.Id }, result);
+        }
+        catch (FluentValidation.ValidationException ex)
+        {
+            var errors = ex.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+            return ValidationProblem(new ValidationProblemDetails(errors));
         }
         catch (InvalidOperationException ex) when(ex.Message.Contains("already exist"))
 
