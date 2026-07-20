@@ -2,7 +2,7 @@ using EthioClass.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EthioClass.Infrastructure.Data;
+namespace EthioClass.Infrastructure.Data.Configurations;
 
 public class SchoolConfiguration : IEntityTypeConfiguration<School>
 {
