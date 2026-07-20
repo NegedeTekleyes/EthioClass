@@ -7,6 +7,10 @@ public record CreateSchoolCommand(
     string Name,
     string NameAmharic,
     string Code,
+    string? Email,
+    string? PhoneNumber,
     string? Address,
     string? City,
-    string? PhoneNumber) : IRequest<SchoolResponseDto>;
+    string? Region,
+    string? Website,
+    string? Motto) : IRequest<SchoolResponseDto>;
