@@ -30,4 +30,6 @@ public class School
     // Audit
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
+
+    public ICollection<User> Users { get; set; } = new List<User>();
 }
