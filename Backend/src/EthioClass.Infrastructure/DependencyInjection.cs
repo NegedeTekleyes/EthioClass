@@ -4,21 +4,29 @@ using EthioClass.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace EthioClass.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection service, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection service, 
+        IConfiguration configuration)
     {
         service.AddDbContext<EthioClassDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("EthioClassDatabase")));
+            options.UseNpgsql(
+                configuration.GetConnectionString("EthioClassDatabase")));
 
-        service.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<EthioClassDbContext>());
+        service.AddScoped<IApplicationDbContext>(
+            provider => provider.GetRequiredService<EthioClassDbContext>());
 
-        service.AddScoped<IPasswordHasher, BcryptPasswordHasher > ();
+        service.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
+
+        service.Configure<JwtSettings>(
+            configuration.GetSection("JwtSettings"));
+
+        service.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
         return service;
-
     }
-    
 }
