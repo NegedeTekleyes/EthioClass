@@ -15,5 +15,5 @@ public class User
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
-    public School School { get; set; } = null;
+    public School School { get; set; } = null!;
 }

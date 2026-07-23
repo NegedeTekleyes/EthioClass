@@ -8,6 +8,7 @@ public class EthioClassDbContext(DbContextOptions<EthioClassDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
     public DbSet<School> Schools => Set<School>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
