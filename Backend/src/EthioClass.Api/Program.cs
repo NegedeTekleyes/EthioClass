@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using EthioClass.Application.Common.Behaviors;
+using EthioClass.Application.Common.Interfaces;
 using EthioClass.Infrastructure;
 using EthioClass.Infrastructure.Services;
 using FluentValidation;
@@ -37,9 +38,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret))
     };
 });
-builder.Services.AddAuthorization();
+    builder.Services.AddAuthorization();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddHttpContextAccessor();
+    builder.Services.AddScoped<ICurrentUserService, EthioClass.Api.Services.CurrentUserService>();
     var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
