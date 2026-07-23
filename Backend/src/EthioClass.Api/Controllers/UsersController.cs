@@ -1,15 +1,18 @@
 using EthioClass.Application.Users.Commands;
 using EthioClass.Application.Users.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EthioClass.Api.Controllers
 {
    [ApiController]
    [Route("api/users")]
+   [Authorize]
    public class UsersController(IMediator mediator) : ControllerBase
    {
       [HttpPost("register")]
+      [AllowAnonymous]
       public async Task<IActionResult> Register(RegisterUserCommand command, CancellationToken ct)
       {
          try
@@ -37,6 +40,7 @@ namespace EthioClass.Api.Controllers
 
 
       [HttpPost("login")]
+      [AllowAnonymous]
       public async Task<IActionResult> Login(LoginQuery query, CancellationToken ct)
       {
          try

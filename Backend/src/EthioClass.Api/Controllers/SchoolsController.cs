@@ -1,12 +1,14 @@
 using EthioClass.Application.Schools.Commands;
 using EthioClass.Application.Schools.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EthioClass.Api.Controllers;
 
 [ApiController]
 [Route("api/schools")]
+[Authorize]
 public class SchoolsController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
