@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using EthioClass.Application.Common.Behaviors;
 using EthioClass.Infrastructure;
 using FluentValidation;
@@ -5,7 +6,11 @@ using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddMediatR(cfg =>cfg.RegisterServicesFromAssembly(typeof(EthioClass.Application.Schools.Commands
